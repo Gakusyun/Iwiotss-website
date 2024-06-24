@@ -8,6 +8,16 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/setting")
+def setting():
+    return render_template("setting.html")
+
+
 if __name__ == "__main__":
     islogin = False
     app.run(debug=True)

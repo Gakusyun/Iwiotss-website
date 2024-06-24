@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bodyCenter {
+    width: 926px;
+    margin: 0 auto;
+    background-color: #6cf;
+    height: 100px;
+}
