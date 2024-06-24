@@ -20,10 +20,10 @@ python main.py
 3. 运行 main.py
 
 ```shell
-sudo apt-get install build-essential python3
-python -m pip install --upgrade pip # 可以使用国内源
-# python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
-pip install -r requirements.txt
+sudo apt-get install build-essential python3 pipx -y
+# python3 -m pip install --upgrade pip # 可以使用国内源
+# python3 -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
+pipx install requirements.txt
 uwsgi --socket 127.0.0.1:3031 --wsgi-file main.py --callable app --processes 4 --threads 2 --stats 127.0.0.1:9191
 ```
 
