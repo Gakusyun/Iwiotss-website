@@ -1,6 +1,24 @@
 from flask import Flask, render_template, url_for, request, redirect
+import json, os
 
 app = Flask(__name__)
+islogin = False
+
+
+def check_credentials(username: str, password: str) -> bool:
+    print(username, password)
+    users_directory = "./users"
+    try:
+        users_files = os.listdir(users_directory)
+        if username + ".json" in users_files:
+            user_file_path = os.path.join(users_directory, username + ".json")
+            with open(user_file_path, "r") as f:
+                data = json.load(f)
+                if data.get("password") == password:
+                    return True
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return False
 
 
 @app.route("/")
@@ -13,11 +31,48 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/setting")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if check_credentials(username, password):
+            global islogin
+            islogin = True
+            return redirect(url_for("home"))
+        else:
+            return '登录失败，请重试！<a href="login">redo</a>'
+    else:
+        return render_template("login.html")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    global islogin
+    if islogin:
+        return redirect(url_for("self"))
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        # 在users文件夹下创建一个文件，文件名是username.json
+        users_directory = "./users"
+        user_file_path = os.path.join(users_directory, username + ".json")
+        if not os.path.exists(users_directory):
+            os.makedirs(users_directory)
+        # 打开（或创建）用户文件准备写入数据
+        with open(user_file_path, "w") as user_file:
+            # 假设我们有一些用户信息要保存，例如字典类型
+            user_data = {"password": password}
+            # 使用json.dump将数据写入文件
+            json.dump(user_data, user_file, indent=4)
+            return redirect(url_for("login"))
+    return render_template("signup.html")
+
+
+@app.route("/self")
 def setting():
-    return render_template("setting.html")
+    return render_template("self.html")
 
 
 if __name__ == "__main__":
-    islogin = False
     app.run(debug=True)
