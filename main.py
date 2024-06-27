@@ -40,7 +40,9 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    developer = ["高学骏", "付典雅", "李恺烨"]
+    random.shuffle(developer)
+    return render_template("about.html", developer=developer)
 
 
 @app.route("/login", methods=["GET", "POST"])
