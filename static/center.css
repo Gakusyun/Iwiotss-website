@@ -6,6 +6,42 @@
 .bodyCenter {
     width: 926px;
     margin: 0 auto;
-    background-color: #6cf;
+    /* background-color: #6cf; */
     height: 100px;
+}
+
+.card {
+    margin: 20px 20px;
+    border: 1px solid rgba(255, 236, 241, 0.533);
+    background-color: rgba(255, 236, 241, 0.533);
+    backdrop-filter: blur(10px);
+    width: 200px;
+    height: 100px;
+    float: left;
+    border-radius: 50px;
+    padding: 20px;
+}
+
+.card .tit {
+    font-size: 30px;
+}
+
+.card p {
+    font-size: 40;
+}
+
+.cardForAbout {
+    margin: 40px auto;
+    border: 1px solid rgba(255, 236, 241, 0.533);
+    background-color: rgba(255, 236, 241, 0.533);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    width: 700px;
+    height: 500px;
+}
+
+.cardForAbout p {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 20px;
 }

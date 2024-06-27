@@ -21,7 +21,31 @@
             </ul>
         </div>
     </div>
-    <div class="bodyCenter"></div>
+    <div class="bodyCenter">
+        <div class="card" id="temperature">
+            <div class="tit">
+                温度
+            </div>
+            <p>摄氏{{ temperature }}度</p>
+        </div>
+        <div class="card" id="humidity">
+            <div class="tit">
+                湿度
+            </div>
+            <p>百分之{{ humidity }}</p>
+        </div>
+    </div>
+    <script>
+        var temperature = {{ temperature }};
+        if (temperature >= 30) {
+            $("#temperature").css({ color: "red" });
+        }
+        var humidity = {{ humidity }}; //忽略这个报错，这不是错误，flask就是这么写的
+        if (humidity >= 50) {
+            $("#humidity").css({ color: "red" });
+        }
+
+    </script>
 </body>
 
 </html>

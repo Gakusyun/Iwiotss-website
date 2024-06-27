@@ -1,8 +1,18 @@
 from flask import Flask, render_template, url_for, request, redirect
-import json, os
+import json, os, random
 
 app = Flask(__name__)
 islogin = False
+
+
+def get_temperature() -> int:
+    temperature = random.randint(0, 50)  # 这里写具体实现
+    return temperature
+
+
+def get_humidity() -> int:
+    humidity = random.randint(0, 99)  # 这里写具体实现
+    return humidity
 
 
 def check_credentials(username: str, password: str) -> bool:
@@ -23,7 +33,9 @@ def check_credentials(username: str, password: str) -> bool:
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template(
+        "index.html", temperature=get_temperature(), humidity=get_humidity()
+    )
 
 
 @app.route("/about")
