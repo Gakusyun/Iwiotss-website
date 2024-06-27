@@ -13,7 +13,7 @@ python main.py
 
 然后浏览器访问 `http://127.0.0.1:5000/`
 
-- 部署环境(loongnix)
+- 部署环境(loongnix) 没玩会，现只支持开发环境
 
 1. 安装 Python, Pip, 及 uWSGI 相关依赖
 2. 安装依赖库 requriments.txt

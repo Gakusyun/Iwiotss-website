@@ -1,2 +1,3 @@
 flask
-uwsgi
+# 下面这个还不知道怎么用，先别装
+# uwsgi
