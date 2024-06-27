@@ -34,6 +34,50 @@
             </div>
             <p>百分之{{ humidity }}</p>
         </div>
+        <div class="card" id="pressure">
+            <div class="tit">
+                压力
+            </div>
+            <p>{{ pressure }}Pa</p>
+        </div>
+        <div class="card" id="device_number">
+            <div class="tit">
+                设备量
+            </div>
+            <p>{{ device_number }}台</p>
+        </div>
+        <div class="card" id="power">
+            <div class="tit">
+                功率
+            </div>
+            <p>{{ power }}W</p>
+        </div>
+        <div class="card" id="power_consumption">
+            <div class="tit">
+                总耗电量
+            </div>
+            <p>{{ power_consumption }}度</p>
+        </div>
+        <div class="card" id="sensor">
+            <div class="tit">
+                传感器详情
+            </div>
+            <p>人在传感器：XXX有人经过</p> 
+            <p>温度传感器：XXX当前温度XXX</p> 
+        </div><!--默认隐藏-->
+        <div class="card" id="device">
+            <div class="tit">
+                设备详情
+            </div>
+            <div></div> <!--可通过数据库或其他方式获取内容-->
+        </div><!--默认隐藏（切换显示时照片会强行放大），动画效果未做-->
+        <div class="card" id="photo">
+            <div class="tit">
+                实时监控
+            </div>
+            <div><img src="../static/img/bgc.jpg"></div> 
+            <!--替换为实时读取监控照片（可做连播图，规定时间刷新）或播放监控视频-->
+        </div>
     </div>
     <script>
         var temperature = {{ temperature }};
@@ -44,7 +88,17 @@
         if (humidity >= 50) {
             $("#humidity").css({ color: "red" });
         }
+        var pressure = {{ pressure }}; //忽略这个报错，这不是错误，flask就是这么写的
+        if (pressure >= 80) {
+            $("#pressure").css({ color: "red" });
+        }
 
+        $('#device_number').click(function() {
+            $('#device').toggle();
+        });; //设备量显示隐藏
+        $('#temperature').click(function() {
+            $('#sensor').toggle();
+        });; //设备量显示隐藏
     </script>
 </body>
 
