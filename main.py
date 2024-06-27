@@ -30,6 +30,7 @@ def get_power_consumption() -> int:
     power_consumption = random.randint(100, 200)  # 这里写具体实现
     return power_consumption
     
+    
 
 def check_credentials(username: str, password: str) -> bool:
     print(username, password)

@@ -29,6 +29,7 @@
 .card p {
     font-size: 40;
 }
+
 #device,#photo,#sensor{
     width: 760px;
     border-radius: 15px;
