@@ -16,6 +16,13 @@ class Sensor(object):  # 这里写了一个类，每多一个传感器，就创�
         self.power = random.randint(100, 1000)
         self.power_consumption = random.randint(100, 200)
 
+    def get_latest_data(self):  # 这里写具体实现
+        self.temperature = random.randint(0, 50)
+        self.humidity = random.randint(0, 99)
+        self.pressure = random.randint(10, 100)
+        self.power = random.randint(100, 1000)
+        self.power_consumption = random.randint(100, 200)
+
     def get_temperature(self) -> int:
         return self.temperature
 
@@ -57,7 +64,7 @@ def check_credentials(username: str, password: str) -> bool:
 
 @app.route("/")
 def home():
-
+    sensor1.get_latest_data()
     return render_template(
         "index.html",
         temperature=sensor1.get_temperature(),
