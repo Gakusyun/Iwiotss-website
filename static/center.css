@@ -30,24 +30,28 @@
     font-size: 40;
 }
 
-#device,#photo,#sensor{
+#device,
+#photo,
+#sensor {
     width: 760px;
     border-radius: 15px;
 }
 
-#device,#sensor{
+#device,
+#sensor {
     display: none;
 }
 
-#device{
+#device {
+    /* margin: 0 auto; */
     height: 200px;
 }
 
-#photo{
+#photo {
     height: 480px;
 }
 
-#photo img{
+#photo img {
     margin: 20px 20px;
     margin-top: 20px;
     width: 720px;

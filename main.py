@@ -14,23 +14,26 @@ def get_humidity() -> int:
     humidity = random.randint(0, 99)  # 这里写具体实现
     return humidity
 
+
 def get_pressure() -> int:
     pressure = random.randint(10, 100)  # 这里写具体实现
     return pressure
+
 
 def get_device_number() -> int:
     device_number = random.randint(2, 10)  # 这里写具体实现
     return device_number
 
+
 def get_power() -> int:
     power = random.randint(100, 1000)  # 这里写具体实现
     return power
-    
+
+
 def get_power_consumption() -> int:
     power_consumption = random.randint(100, 200)  # 这里写具体实现
     return power_consumption
-    
-    
+
 
 def check_credentials(username: str, password: str) -> bool:
     print(username, password)
@@ -51,8 +54,13 @@ def check_credentials(username: str, password: str) -> bool:
 @app.route("/")
 def home():
     return render_template(
-        "index.html", temperature=get_temperature(), humidity=get_humidity(),pressure=get_pressure(),
-        device_number=get_device_number(),power=get_power(),power_consumption=get_power_consumption()
+        "index.html",
+        temperature=get_temperature(),
+        humidity=get_humidity(),
+        pressure=get_pressure(),
+        device_number=get_device_number(),
+        power=get_power(),
+        power_consumption=get_power_consumption(),
     )
 
 
