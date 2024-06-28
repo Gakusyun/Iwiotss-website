@@ -38,9 +38,9 @@
             <div class="tit">
                 压力
             </div>
-            <p>{{ pressure }}Pa</p>
+            <p>{{ pressure }}帕斯卡</p>
         </div>
-        <div class="card" id="device_number">
+        <div class="card" id="device_count">
             <div class="tit">
                 设备量
             </div>
@@ -50,20 +50,20 @@
             <div class="tit">
                 功率
             </div>
-            <p>{{ power }}W</p>
+            <p>{{ power }}瓦特</p>
         </div>
         <div class="card" id="power_consumption">
             <div class="tit">
                 总耗电量
             </div>
-            <p>{{ power_consumption }}度</p>
+            <p>{{ power_consumption }}千瓦时</p>
         </div>
         <div class="card" id="sensor">
             <div class="tit">
                 传感器详情
             </div>
-            <p>人在传感器：XXX有人经过</p> 
-            <p>温度传感器：XXX当前温度XXX</p> 
+            <p>人在传感器：XXX有人经过</p>
+            <p>温度传感器：XXX当前温度XXX</p>
         </div><!--默认隐藏-->
         <div class="card" id="device">
             <div class="tit">
@@ -75,7 +75,7 @@
             <div class="tit">
                 实时监控
             </div>
-            <div><img src="../static/img/bgc.jpg"></div> 
+            <div><img src="../static/img/bgc.jpg"></div>
             <!--替换为实时读取监控照片（可做连播图，规定时间刷新） 或播放监控视频-->
         </div>
     </div>
@@ -93,10 +93,10 @@
             $("#pressure").css({ color: "red" });
         }
 
-        $('#device_number').click(function() {
+        $('#device_number').click(function () {
             $('#device').toggle();
         });; //设备量显示隐藏
-        $('#temperature').click(function() {
+        $('#temperature').click(function () {
             $('#sensor').toggle();
         });; //传感器显示隐藏
     </script>

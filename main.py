@@ -5,34 +5,38 @@ app = Flask(__name__)
 islogin = False
 
 
-def get_temperature() -> int:
-    temperature = random.randint(0, 50)  # 这里写具体实现
-    return temperature
+class Sensor(object):  # 这里写了一个类，每多一个传感器，就创建一个对象
+    instances = 0
+
+    def __init__(self):
+        Sensor.instances += 1
+        self.temperature = random.randint(0, 50)
+        self.humidity = random.randint(0, 99)
+        self.pressure = random.randint(10, 100)
+        self.power = random.randint(100, 1000)
+        self.power_consumption = random.randint(100, 200)
+
+    def get_temperature(self) -> int:
+        return self.temperature
+
+    def get_humidity(self) -> int:
+        return self.humidity
+
+    def get_pressure(self) -> int:
+        return self.pressure
+
+    def get_power(self) -> int:
+        return self.power
+
+    def get_power_consumption(self) -> int:
+        return self.power_consumption
+
+    @classmethod
+    def get_Sensor_count(cls):
+        return cls.instances
 
 
-def get_humidity() -> int:
-    humidity = random.randint(0, 99)  # 这里写具体实现
-    return humidity
-
-
-def get_pressure() -> int:
-    pressure = random.randint(10, 100)  # 这里写具体实现
-    return pressure
-
-
-def get_device_number() -> int:
-    device_number = random.randint(2, 10)  # 这里写具体实现
-    return device_number
-
-
-def get_power() -> int:
-    power = random.randint(100, 1000)  # 这里写具体实现
-    return power
-
-
-def get_power_consumption() -> int:
-    power_consumption = random.randint(100, 200)  # 这里写具体实现
-    return power_consumption
+sensor1 = Sensor()  # 创建对象
 
 
 def check_credentials(username: str, password: str) -> bool:
@@ -53,14 +57,15 @@ def check_credentials(username: str, password: str) -> bool:
 
 @app.route("/")
 def home():
+
     return render_template(
         "index.html",
-        temperature=get_temperature(),
-        humidity=get_humidity(),
-        pressure=get_pressure(),
-        device_number=get_device_number(),
-        power=get_power(),
-        power_consumption=get_power_consumption(),
+        temperature=sensor1.get_temperature(),
+        humidity=sensor1.get_humidity(),
+        pressure=sensor1.get_pressure(),
+        device_number=Sensor.get_Sensor_count(),
+        power=sensor1.get_power(),
+        power_consumption=sensor1.get_power_consumption(),
     )
 
 
