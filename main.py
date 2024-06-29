@@ -2,19 +2,19 @@ from flask import Flask, render_template, url_for, request, redirect
 import json, os, random
 
 app = Flask(__name__)
-islogin = False
+is_login = False
+
+
+class User(object):
+    username = ""
 
 
 class Sensor(object):  # 这里写了一个类，每多一个传感器，就创建一个对象
     instances = 0
 
     def __init__(self):
-        Sensor.instances += 1
-        self.temperature = random.randint(0, 50)
-        self.humidity = random.randint(0, 99)
-        self.pressure = random.randint(10, 100)
-        self.power = random.randint(100, 1000)
-        self.power_consumption = random.randint(100, 200)
+        Sensor.instances += 1  # 计数，用于获取传感器数量
+        self.get_latest_data()
 
     def get_latest_data(self):  # 这里写具体实现
         self.temperature = random.randint(0, 50)
@@ -39,11 +39,14 @@ class Sensor(object):  # 这里写了一个类，每多一个传感器，就创�
         return self.power_consumption
 
     @classmethod
-    def get_Sensor_count(cls):
+    def get_Sensor_count(cls):  # 计数，用于获取传感器数量
         return cls.instances
 
 
 sensor1 = Sensor()  # 创建对象
+sensor2 = Sensor()
+sensor3 = Sensor()
+sensor4 = Sensor()
 
 
 def check_credentials(username: str, password: str) -> bool:
@@ -56,6 +59,7 @@ def check_credentials(username: str, password: str) -> bool:
             with open(user_file_path, "r") as f:
                 data = json.load(f)
                 if data.get("password") == password:
+                    User.username = username
                     return True
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -65,14 +69,16 @@ def check_credentials(username: str, password: str) -> bool:
 @app.route("/")
 def home():
     sensor1.get_latest_data()
+    sensor2.get_latest_data()
+    sensor3.get_latest_data()
+    sensor4.get_latest_data()
     return render_template(
         "index.html",
-        temperature=sensor1.get_temperature(),
-        humidity=sensor1.get_humidity(),
-        pressure=sensor1.get_pressure(),
         device_number=Sensor.get_Sensor_count(),
-        power=sensor1.get_power(),
-        power_consumption=sensor1.get_power_consumption(),
+        sensor1=sensor1,
+        sensor2=sensor2,
+        sensor3=sensor3,
+        sensor4=sensor4,
     )
 
 
@@ -85,12 +91,15 @@ def about():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    global is_login
+    print(is_login)
+    if is_login:
+        return redirect(url_for("self"))
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
         if check_credentials(username, password):
-            global islogin
-            islogin = True
+            is_login = True
             return redirect(url_for("home"))
         else:
             return '登录失败，请重试！<a href="login">redo</a>'
@@ -100,9 +109,6 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    global islogin
-    if islogin:
-        return redirect(url_for("self"))
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -122,8 +128,16 @@ def signup():
 
 
 @app.route("/self")
-def setting():
-    return render_template("self.html")
+def self():
+    return render_template("self.html", User=User)
+
+
+@app.route("/logout")
+def logout():
+    global is_login
+    is_login = False
+    User.username = ""
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":

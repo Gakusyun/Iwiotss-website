@@ -26,51 +26,88 @@
             <div class="tit">
                 温度
             </div>
-            <p>摄氏{{ temperature }}度</p>
+            <p>摄氏{{ sensor1.get_temperature() }}度</p>
         </div>
         <div class="card" id="humidity">
             <div class="tit">
                 湿度
             </div>
-            <p>百分之{{ humidity }}</p>
+            <p>百分之{{ sensor1.get_humidity() }}</p>
         </div>
         <div class="card" id="pressure">
             <div class="tit">
                 压力
             </div>
-            <p>{{ pressure }}帕斯卡</p>
+            <p>{{ sensor1.get_pressure() }}帕斯卡</p>
         </div>
         <div class="card" id="device_count">
             <div class="tit">
                 设备量
             </div>
             <p>{{ device_number }}台</p>
+            <label for="sensors">选择传感器</label>
+            <select id="sensors" name="sensors">
+                <option value="sensor1">传感器1</option>
+                <option value="sensor2">传感器2</option>
+                <option value="sensor3">传感器3</option>
+                <option value="sensor4">传感器4</option>
+            </select>
+            <script>
+                $('#sensors').change(function () {
+                    $value = $('#sensors').val();
+                    if ($value == 'sensor1') {
+                        $('#temperature p').html("摄氏" + {{ sensor1.get_temperature() }} +"度");
+                $('#humidity p').html("百分之" + {{ sensor1.get_humidity() }});
+                $('#pressure p').html({{ sensor1.get_pressure() }}+"帕斯卡");
+                $('#power p').html({{ sensor1.get_power() }}+"瓦特");
+                $('#power_consumption p').html({{ sensor1.get_power_consumption() }}+"千瓦时");
+                    }else if ($value == 'sensor2') {
+                    $('#temperature p').html("摄氏" + {{ sensor2.get_temperature() }} +"度");
+                $('#humidity p').html("百分之" + {{ sensor2.get_humidity() }});
+                $('#pressure p').html({{ sensor2.get_pressure() }}+"帕斯卡");
+                $('#power p').html({{ sensor2.get_power() }}+"瓦特");
+                $('#power_consumption p').html({{ sensor2.get_power_consumption() }}+"千瓦时");
+                    }else if ($value == 'sensor3') {
+                    $('#temperature p').html("摄氏" + {{ sensor3.get_temperature() }} +"度");
+                $('#humidity p').html("百分之" + {{ sensor3.get_humidity() }});
+                $('#pressure p').html({{ sensor3.get_pressure() }}+"帕斯卡");
+                $('#power p').html({{ sensor3.get_power() }}+"瓦特");
+                $('#power_consumption p').html({{ sensor3.get_power_consumption() }}+"千瓦时");
+                    }else if ($value == 'sensor4') {
+                    $('#temperature p').html("摄氏" + {{ sensor4.get_temperature() }} +"度");
+                $('#humidity p').html("百分之" + {{ sensor4.get_humidity() }});
+                $('#pressure p').html({{ sensor4.get_pressure() }}+"帕斯卡");
+                $('#power p').html({{ sensor4.get_power() }}+"瓦特");
+                $('#power_consumption p').html({{ sensor4.get_power_consumption() }}+"千瓦时");
+                    }
+                });
+            </script>
         </div>
         <div class="card" id="power">
             <div class="tit">
                 功率
             </div>
-            <p>{{ power }}瓦特</p>
+            <p>{{ sensor1.get_power() }}瓦特</p>
         </div>
         <div class="card" id="power_consumption">
             <div class="tit">
                 总耗电量
             </div>
-            <p>{{ power_consumption }}千瓦时</p>
+            <p>{{ sensor1.get_power_consumption() }}千瓦时</p>
         </div>
-        <div class="card" id="sensor">
+        <!-- <div class="card" id="sensor">
             <div class="tit">
                 传感器详情
             </div>
             <p>人在传感器：XXX有人经过</p>
             <p>温度传感器：XXX当前温度XXX</p>
-        </div><!--默认隐藏-->
+        </div>默认隐藏
         <div class="card" id="device">
             <div class="tit">
                 设备详情
             </div>
-            <div></div> <!--可通过数据库或其他方式获取内容-->
-        </div><!--默认隐藏（切换显示时照片会强行放大），动画效果未做-->
+            <div></div> 可通过数据库或其他方式获取内容
+        </div>默认隐藏（切换显示时照片会强行放大），动画效果未做-->
         <div class="card" id="photo">
             <div class="tit">
                 实时监控
@@ -79,7 +116,7 @@
             <!--替换为实时读取监控照片（可做连播图，规定时间刷新） 或播放监控视频-->
         </div>
     </div>
-    <script>
+    <!-- <script>
         var temperature = {{ temperature }};
         if (temperature >= 30) {
             $("#temperature").css({ color: "red" });
@@ -99,7 +136,7 @@
         $('#temperature').click(function () {
             $('#sensor').toggle();
         });; //传感器显示隐藏
-    </script>
+    </script> -->
 </body>
 
 </html>
