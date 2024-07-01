@@ -32,6 +32,11 @@ body {
     font-size: large;
 }
 
+.title .top .logo a {
+    text-decoration: none;
+    color: #000;
+}
+
 .title .top ul {
     width: 360px;
     float: right

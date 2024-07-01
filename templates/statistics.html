@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iwiotss-about</title>
+    <title>{{msg}}</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="{{url_for('static',filename='title.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='center.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='title.css')}}">
 </head>
 
 <body>
     <div class="title">
         <div class="top">
-            <div class="logo">Iwiotss</div>
+            <div class="logo"><a href="/">Iwiotss</a></div>
             <ul>
                 <li><a href="{{url_for('home')}}">首页</a></li>
                 <li><a href="{{url_for('about')}}">关于</a></li>
@@ -22,9 +22,11 @@
         </div>
     </div>
     <div class="bodyCenter">
-        <div class="cardForAbout">
-            <p>由<b>{{developer[0]}}</b>、<b>{{developer[1]}}</b>、<b>{{developer[2]}}</b>制作（排名不分先后）</p>
-            <!-- Made by Gakusyun, Dianya Fu, Karl-->
+        <div class="card" id="photo">
+            <div class="tit">
+                {{msg}}
+            </div>
+            <div><img src="{{url_for('static',filename=img_path)}}" /></div>
         </div>
     </div>
 </body>

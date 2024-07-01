@@ -13,7 +13,7 @@
 <body>
     <div class="title">
         <div class="top">
-            <div class="logo">Iwiotss</div>
+            <div class="logo"><a href="/">Iwiotss</a></div>
             <ul>
                 <li><a href="{{url_for('home')}}">首页</a></li>
                 <li><a href="{{url_for('about')}}">关于</a></li>
@@ -23,22 +23,28 @@
     </div>
     <div class="bodyCenter">
         <div class="card" id="temperature">
-            <div class="tit">
-                温度
-            </div>
-            <p>摄氏{{ sensor1.get_temperature() }}度</p>
+            <a href="/statistics/temperature">
+                <div class="tit">
+                    温度
+                </div>
+                <p>摄氏{{ sensor1.get_temperature() }}度</p>
+            </a>
         </div>
         <div class="card" id="humidity">
-            <div class="tit">
-                湿度
-            </div>
-            <p>百分之{{ sensor1.get_humidity() }}</p>
+            <a href="/statistics/humidity">
+                <div class="tit">
+                    湿度
+                </div>
+                <p>百分之{{ sensor1.get_humidity() }}</p>
+            </a>
         </div>
         <div class="card" id="pressure">
-            <div class="tit">
-                压力
-            </div>
-            <p>{{ sensor1.get_pressure() }}帕斯卡</p>
+            <a href="/statistics/pressure">
+                <div class="tit">
+                    压力
+                </div>
+                <p>{{ sensor1.get_pressure() }}帕斯卡</p>
+            </a>
         </div>
         <div class="card" id="device_count">
             <div class="tit">
@@ -84,16 +90,20 @@
             </script>
         </div>
         <div class="card" id="power">
-            <div class="tit">
-                功率
-            </div>
-            <p>{{ sensor1.get_power() }}瓦特</p>
+            <a href="/statistics/power">
+                <div class="tit">
+                    功率
+                </div>
+                <p>{{ sensor1.get_power() }}瓦特</p>
+            </a>
         </div>
         <div class="card" id="power_consumption">
-            <div class="tit">
-                总耗电量
-            </div>
-            <p>{{ sensor1.get_power_consumption() }}千瓦时</p>
+            <a href="/statistics/power_consumption">
+                <div class="tit">
+                    总耗电量
+                </div>
+                <p>{{ sensor1.get_power_consumption() }}千瓦时</p>
+            </a>
         </div>
         <!-- <div class="card" id="sensor">
             <div class="tit">

@@ -1,5 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect
 import json, os, random
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 is_login = False
@@ -79,6 +83,88 @@ def home():
         sensor2=sensor2,
         sensor3=sensor3,
         sensor4=sensor4,
+    )
+
+
+@app.route("/statistics/temperature")
+def temperature():
+    plt.rcParams["font.sans-serif"] = ["SimHei"]
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("温度变化趋势")
+    plt.xlabel("时间")
+    plt.ylabel("温度")
+    plt.savefig("./static/img/temperature_trend.png")
+    plt.close()
+    return render_template(
+        "statistics.html", msg="温度", img_path="img/temperature_trend.png"
+    )
+
+
+@app.route("/statistics/humidity")
+def humidity():
+    plt.rcParams["font.sans-serif"] = ["SimHei"]
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("湿度变化趋势")
+    plt.xlabel("时间")
+    plt.ylabel("湿度")
+    plt.savefig("./static/img/humidity_trend.png")
+    plt.close()
+    return render_template(
+        "statistics.html", msg="湿度", img_path="img/humidity_trend.png"
+    )
+
+
+@app.route("/statistics/pressure")
+def pressure():
+    plt.rcParams["font.sans-serif"] = ["SimHei"]
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("压力变化趋势")
+    plt.xlabel("时间")
+    plt.ylabel("压力")
+    plt.savefig("./static/img/pressure_trend.png")
+    plt.close()
+    return render_template(
+        "statistics.html", msg="压力", img_path="img/pressure_trend.png"
+    )
+
+
+@app.route("/statistics/power")
+def power():
+    plt.rcParams["font.sans-serif"] = ["SimHei"]
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("功率变化趋势")
+    plt.xlabel("时间")
+    plt.ylabel("功率")
+    plt.savefig("./static/img/power_trend.png")
+    plt.close()
+    return render_template(
+        "statistics.html", msg="功率", img_path="img/power_trend.png"
+    )
+
+
+@app.route("/statistics/power_consumption")
+def power_consumption():
+    plt.rcParams["font.sans-serif"] = ["SimHei"]
+    x = range(10)
+    y = [random.randint(100, 1000) for i in range(10)]
+    # y 按升序排序
+    y.sort()
+    plt.plot(x, y)
+    plt.title("功耗变化趋势")
+    plt.xlabel("时间")
+    plt.ylabel("功耗")
+    plt.savefig("./static/img/power_consumption_trend.png")
+    plt.close()
+    return render_template(
+        "statistics.html", msg="功耗", img_path="img/power_consumption_trend.png"
     )
 
 
