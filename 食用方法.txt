@@ -10,7 +10,7 @@ https://www.python.org/downloads/
     python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 安装 Flask:
-    pip install flask
+    pip install -r requirements.txt
 
 现在，就可以运行这个项目了:
     python main.py
