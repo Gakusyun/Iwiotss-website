@@ -9,9 +9,10 @@ https://www.python.org/downloads/
 或者，可以使用国内镜像源安装 pip:
     python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-安装 Flask:
+安装 依赖库:
     pip install -r requirements.txt
-
+如果不行，可以试试：
+    pip install --break-system-packages -r requirements.txt
 现在，就可以运行这个项目了:
     python main.py
 
@@ -23,5 +24,3 @@ https://www.python.org/downloads/
 这时，就可以在浏览器中输入：
     http://127.0.0.1:5000/
 进入主页了。
-
-在 main.py 中，写了一系列用于获取数据的方法，但都没有实现。

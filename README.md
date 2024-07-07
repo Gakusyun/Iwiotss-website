@@ -15,9 +15,13 @@ https://www.python.org/downloads/
 ```shell
     python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-安装 Flask:
+安装 依赖库:
 ```shell
-    pip install flask
+    pip install -r requirements.txt
+```
+如果不行，可以试试：
+```shell
+    pip install --break-system-packages -r requirements.txt
 ```
 现在，就可以运行这个项目了:
 ```shell
@@ -31,15 +35,3 @@ https://www.python.org/downloads/
 
 这时，就可以在浏览器中输入：`http://127.0.0.1:5000/`就能进入主页了。
 
-
-# Usaage
-1. Insall Python
-2. Insall requriments.txt
-3. Run maim.py
-
-```shell
-pip install -r requirements.txt
-python main.py
-````
-
-Then open `http://127.0.0.1:5000/` in your browser
