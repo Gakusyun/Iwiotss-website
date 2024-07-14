@@ -15,11 +15,36 @@ class User(object):
     username = ""
     password = ""
     send_key = "空"
+    send_server = "None"
 
 
-def sc_send(text, desp="", key="[SENDKEY]"):
+def send(title, body):
+    if User.send_server == "server_chan":
+        sc_send(title, body, User.send_key)
+    elif User.send_server == "bark":
+        bark_send(title, body, User.send_key)
+    else:
+        print("还未设置发送服务器")
+
+
+def sc_send(text, desp="", key=""):
     postdata = urllib.parse.urlencode({"text": text, "desp": desp}).encode("utf-8")
     url = f"https://sctapi.ftqq.com/{key}.send"
+    req = urllib.request.Request(url, data=postdata, method="POST")
+    with urllib.request.urlopen(req) as response:
+        result = response.read().decode("utf-8")
+        print(result)
+
+
+def bark_send(title, body="", key=""):
+    postdata = urllib.parse.urlencode(
+        {
+            "title": title,
+            "body": body,
+            "icon": "https://img.picui.cn/free/2024/07/14/6693d11d1d3b4.jpg",
+        }
+    ).encode("utf-8")
+    url = f"https://api.day.app/{key}/"
     req = urllib.request.Request(url, data=postdata, method="POST")
     with urllib.request.urlopen(req) as response:
         result = response.read().decode("utf-8")
@@ -77,9 +102,10 @@ def check_credentials(username: str, password: str) -> bool:
                 data = json.load(f)
                 print(data.get("password"))
                 if data.get("password") == password:
-                    User.password = password
                     User.username = username
+                    User.password = password
                     User.send_key = data["send_key"]
+                    User.send_server = data["send_server"]
                     return True
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -222,7 +248,7 @@ def signup():
         # 打开（或创建）用户文件准备写入数据
         with open(user_file_path, "w", encoding="utf-8") as user_file:
             # 假设我们有一些用户信息要保存，例如字典类型
-            user_data = {"password": password, "send_key": ""}
+            user_data = {"password": password, "send_key": "", "send_server": "None"}
             # 使用json.dump将数据写入文件
             json.dump(user_data, user_file, indent=4)
             return redirect(url_for("login"))
@@ -234,13 +260,19 @@ def settings():
     if request.method == "POST":
         password = request.form.get("password")
         send_key = request.form.get("send_key")
+        send_server = request.form.get("send_server")
         print("密码" + password, send_key)
         # 修改用户文件中的密码
         User.password = password
         User.send_key = send_key
+        User.send_server = send_server
         user_file_path = os.path.join("./users", User.username + ".json")
         with open(user_file_path, "w", encoding="utf-8") as user_file:
-            user_data = {"password": password, "send_key": send_key}
+            user_data = {
+                "password": password,
+                "send_key": send_key,
+                "send_server": send_server,
+            }
             json.dump(user_data, user_file, indent=4)
         return redirect(url_for("logout"))
     return render_template("settings.html", User=User)
@@ -253,11 +285,22 @@ def self():
 
 @app.route("/logout")
 def logout():
-
     global is_login
     is_login = False
     User.username = ""
     return redirect(url_for("login"))
+
+
+@app.route("/develope", methods=["GET", "POST"])
+def develope():
+    if request.method == "POST":
+        title = request.form.get("title")
+        body = request.form.get("body")
+        send(title, body)
+    global is_login
+    if not is_login:
+        return "You Should Login before you access this page!<br /><a href='login'>Login</a>"
+    return render_template("develope.html", User=User)
 
 
 if __name__ == "__main__":

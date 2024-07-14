@@ -23,10 +23,20 @@
     </div>
     <div class="bodyCenter">
         <div class="cardForAbout">
-            <p>由<b>{{developer[0]}}</b>、<b>{{developer[1]}}</b>、<b>{{developer[2]}}</b>制作（排名不分先后）</p>
+            <p onclick="devplus()">由<b>{{developer[0]}}</b>、<b>{{developer[1]}}</b>、<b>{{developer[2]}}</b>制作（排名不分先后）
+            </p>
             <!-- Made by Gakusyun, Dianya Fu, Karl-->
         </div>
     </div>
+    <script>
+        clicktimes = 0;
+        function devplus() {
+            clicktimes++;
+            if (clicktimes >= 5) {
+                location.href = "/develope";
+            }
+        }
+    </script>
 </body>
 
 </html>

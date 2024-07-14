@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Develope</title>
+</head>
+
+<body>
+    <h1>Iwiotss Develope Page</h1>
+    <p>Hello, {{User.username}}</p>
+    <h2>Send Server</h2>
+    <p>Send Server: {{User.send_server}}</p>
+    <p>Your Send Key: {{User.send_key}}</p>
+    <form action="{{ url_for('develope') }}" method="POST">
+        Title: <input type="text" name="title" /><br />
+        Content: <input type="text" name="body" /><br />
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+
+</html>
