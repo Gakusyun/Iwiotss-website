@@ -92,3 +92,67 @@
     text-decoration: none;
     color: red;
 }
+
+.input {
+    width: 250px;
+    border-radius: 15px;
+    margin: 30px auto 0px;
+    padding: 0 20px;
+    line-height: 50px;
+    background-color: #f1b3c4;
+
+}
+
+.pp {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.pp p {
+    width: 300px;
+    margin-left: 10px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 30px;
+}
+
+.input input {
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    outline: none;
+    border: 0;
+    margin: 0 auto;
+    background-color: #f1b3c4;
+}
+
+.input input:hover {
+    border-bottom: 2px solid #000;
+    transition: all 0.10s;
+}
+
+.input input:focus {
+    border-bottom: 2px solid #000;
+}
+
+.btnArea {
+    margin: 35px auto;
+    width: 250px
+}
+
+.btnArea button {
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #f1b3c4;
+    outline: none;
+    display: block;
+    margin: 35px auto;
+    border: 0;
+}
+
+.btnArea button:hover {
+    background-color: #FF6699;
+    transition: all 0.10s;
+}

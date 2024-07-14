@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iwiotss-Self</title>
+    <title>Iwiotss-Setting</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static',filename='center.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='title.css')}}">
@@ -23,10 +23,17 @@
     </div>
     <div class="center">
         <div class="cardForAbout">
-            <p>你好，{{User.username}}！</p>
-            <p><a href="{{url_for('logout')}}">退出登录</a></p>
-            <p>Send Key:{{User.send_key}}</p>
-            <p><a href="{{url_for('settings')}}">设置</a></p>
+            <div class="pp">
+                <p>修改信息</p>
+                留空为不修改<br />为了安全起见，每次修改必须修改密码
+            </div>
+            <form action="{{ url_for('settings') }}" method="POST">
+                <div class="input">新密码 <input type="password" id="password" name="password" required></div>
+                <div class="input">推送密钥<input type="text" id="send_key" name="send_key" required></div>
+                <div class="btnArea">
+                    <button type="submit" id="login">确认修改</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

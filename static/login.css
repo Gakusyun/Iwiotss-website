@@ -9,7 +9,7 @@
 }
 
 .loginblock p {
-    width: 250px;
+    width: 300px;
     margin-left: 10px;
     margin: 30px auto;
     text-align: left;
@@ -17,7 +17,7 @@
 }
 
 .input {
-    width: 200px;
+    width: 250px;
     border-radius: 15px;
     margin: 30px auto 0px;
     padding: 0 20px;

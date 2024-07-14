@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request, redirect
 import json, os, random
 import matplotlib
+import urllib.parse
+import urllib.request
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -11,6 +13,17 @@ is_login = False
 
 class User(object):
     username = ""
+    password = ""
+    send_key = "空"
+
+
+def sc_send(text, desp="", key="[SENDKEY]"):
+    postdata = urllib.parse.urlencode({"text": text, "desp": desp}).encode("utf-8")
+    url = f"https://sctapi.ftqq.com/{key}.send"
+    req = urllib.request.Request(url, data=postdata, method="POST")
+    with urllib.request.urlopen(req) as response:
+        result = response.read().decode("utf-8")
+        print(result)
 
 
 class Sensor(object):  # 这里写了一个类，每多一个传感器，就创建一个对象
@@ -60,10 +73,13 @@ def check_credentials(username: str, password: str) -> bool:
         users_files = os.listdir(users_directory)
         if username + ".json" in users_files:
             user_file_path = os.path.join(users_directory, username + ".json")
-            with open(user_file_path, "r") as f:
+            with open(user_file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
+                print(data.get("password"))
                 if data.get("password") == password:
+                    User.password = password
                     User.username = username
+                    User.send_key = data["send_key"]
                     return True
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -186,7 +202,7 @@ def login():
         password = request.form.get("password")
         if check_credentials(username, password):
             is_login = True
-            return redirect(url_for("home"))
+            return redirect(url_for("self"))
         else:
             return '登录失败，请重试！<a href="login">redo</a>'
     else:
@@ -204,13 +220,30 @@ def signup():
         if not os.path.exists(users_directory):
             os.makedirs(users_directory)
         # 打开（或创建）用户文件准备写入数据
-        with open(user_file_path, "w") as user_file:
+        with open(user_file_path, "w", encoding="utf-8") as user_file:
             # 假设我们有一些用户信息要保存，例如字典类型
-            user_data = {"password": password}
+            user_data = {"password": password, "send_key": ""}
             # 使用json.dump将数据写入文件
             json.dump(user_data, user_file, indent=4)
             return redirect(url_for("login"))
     return render_template("signup.html")
+
+
+@app.route("/settings", methods=["GET", "POST"])
+def settings():
+    if request.method == "POST":
+        password = request.form.get("password")
+        send_key = request.form.get("send_key")
+        print("密码" + password, send_key)
+        # 修改用户文件中的密码
+        User.password = password
+        User.send_key = send_key
+        user_file_path = os.path.join("./users", User.username + ".json")
+        with open(user_file_path, "w", encoding="utf-8") as user_file:
+            user_data = {"password": password, "send_key": send_key}
+            json.dump(user_data, user_file, indent=4)
+        return redirect(url_for("logout"))
+    return render_template("settings.html", User=User)
 
 
 @app.route("/self")
@@ -220,10 +253,11 @@ def self():
 
 @app.route("/logout")
 def logout():
+
     global is_login
     is_login = False
     User.username = ""
-    return redirect(url_for("home"))
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
