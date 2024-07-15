@@ -299,7 +299,7 @@ def develope():
         send(title, body)
     global is_login
     if not is_login:
-        return "You Should Login before you access this page!<br /><a href='login'>Login</a>"
+        return "<h1>You Should Login before you access this page!</h1><br /><a href='login'>Login</a>"
     return render_template("develope.html", User=User)
 
 
