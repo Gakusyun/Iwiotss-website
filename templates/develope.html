@@ -8,16 +8,16 @@
 </head>
 
 <body>
-    <h1>Iwiotss Develope Page</h1>
-    <p>Hello, {{User.username}}</p>
-    <h2>Push Server</h2>
-    <p>Push Server: {{User.send_server}}</p>
-    <p>Your Send Key: {{User.send_key}}</p>
-    <form action="{{ url_for('develope') }}" method="POST">
-        Title: <input type="text" name="title" /><br />
-        Content: <input type="text" name="body" /><br />
-        <input type="submit" value="Submit" />
-    </form>
+<h1>Iwiotss Develope Page</h1>
+<p>Hello, {{ User.username }}</p>
+<h2>Push Server</h2>
+<p>Push Server: {{ User.send_server }}</p>
+<p>Your Send Key: {{ User.send_key }}</p>
+<form action="{{ url_for('develope') }}" method="POST">
+    Title: <input type="text" name="title"/><br/>
+    Content: <input type="text" name="body"/><br/>
+    <input type="submit" value="Submit"/>
+</form>
 </body>
 
 </html>
