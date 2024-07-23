@@ -7,21 +7,8 @@ https://www.python.org/downloads/
 
 安装完 Python 后，请安装 pip:
 在命令行中输入命令：
-
-```shell
-    python -m pip install --upgrade pip
 ```
-或者，可以使用国内镜像源安装 pip:
-```shell
-    python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-安装 依赖库:
-```shell
-    pip install -r requirements.txt
-```
-如果不行，可以试试：
-```shell
-    pip install --break-system-packages -r requirements.txt
+sudo apt install python-pip#
 ```
 现在，就可以运行这个项目了:
 ```shell
