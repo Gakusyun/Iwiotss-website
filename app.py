@@ -4,9 +4,11 @@ import matplotlib
 import urllib.parse
 import urllib.request
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 
 matplotlib.use("Agg")
-
+font_path = './static/fonts/MiSans-Normal.ttf'  # 替换为你的字体文件路径
+font_prop = FontProperties(fname=font_path)
 app = Flask(__name__)
 is_login = False
 
@@ -130,13 +132,12 @@ def home():
 
 @app.route("/statistics/temperature")
 def temperature():
-    plt.rcParams["font.sans-serif"] = ["SimHei"]
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("温度变化趋势")
-    plt.xlabel("时间")
-    plt.ylabel("温度")
+    plt.title("温度变化趋势",fontproperties=font_prop)
+    plt.xlabel("时间",fontproperties=font_prop)
+    plt.ylabel("温度",fontproperties=font_prop)
     plt.savefig("./static/img/temperature_trend.png")
     plt.close()
     return render_template(
@@ -146,13 +147,12 @@ def temperature():
 
 @app.route("/statistics/humidity")
 def humidity():
-    plt.rcParams["font.sans-serif"] = ["SimHei"]
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("湿度变化趋势")
-    plt.xlabel("时间")
-    plt.ylabel("湿度")
+    plt.title("湿度变化趋势",fontproperties=font_prop)
+    plt.xlabel("时间",fontproperties=font_prop)
+    plt.ylabel("湿度",fontproperties=font_prop)
     plt.savefig("./static/img/humidity_trend.png")
     plt.close()
     return render_template(
@@ -162,13 +162,12 @@ def humidity():
 
 @app.route("/statistics/pressure")
 def pressure():
-    plt.rcParams["font.sans-serif"] = ["SimHei"]
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("压力变化趋势")
-    plt.xlabel("时间")
-    plt.ylabel("压力")
+    plt.title("压力变化趋势",fontproperties=font_prop)
+    plt.xlabel("时间",fontproperties=font_prop)
+    plt.ylabel("压力",fontproperties=font_prop)
     plt.savefig("./static/img/pressure_trend.png")
     plt.close()
     return render_template(
@@ -178,13 +177,12 @@ def pressure():
 
 @app.route("/statistics/power")
 def power():
-    plt.rcParams["font.sans-serif"] = ["SimHei"]
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("功率变化趋势")
-    plt.xlabel("时间")
-    plt.ylabel("功率")
+    plt.title("功率变化趋势",fontproperties=font_prop)
+    plt.xlabel("时间",fontproperties=font_prop)
+    plt.ylabel("功率",fontproperties=font_prop)
     plt.savefig("./static/img/power_trend.png")
     plt.close()
     return render_template(
@@ -194,15 +192,14 @@ def power():
 
 @app.route("/statistics/power_consumption")
 def power_consumption():
-    plt.rcParams["font.sans-serif"] = ["SimHei"]
     x = range(10)
     y = [random.randint(100, 1000) for i in range(10)]
     # y 按升序排序
     y.sort()
     plt.plot(x, y)
-    plt.title("功耗变化趋势")
-    plt.xlabel("时间")
-    plt.ylabel("功耗")
+    plt.title("功耗变化趋势",fontproperties=font_prop)
+    plt.xlabel("时间",fontproperties=font_prop)
+    plt.ylabel("功耗",fontproperties=font_prop)
     plt.savefig("./static/img/power_consumption_trend.png")
     plt.close()
     return render_template(
