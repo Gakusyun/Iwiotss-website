@@ -135,9 +135,9 @@ def temperature():
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("温度变化趋势",fontproperties=font_prop)
-    plt.xlabel("时间",fontproperties=font_prop)
-    plt.ylabel("温度",fontproperties=font_prop)
+    plt.title("温度变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("温度", fontproperties=font_prop)
     plt.savefig("./static/img/temperature_trend.png")
     plt.close()
     return render_template(
@@ -150,9 +150,9 @@ def humidity():
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("湿度变化趋势",fontproperties=font_prop)
-    plt.xlabel("时间",fontproperties=font_prop)
-    plt.ylabel("湿度",fontproperties=font_prop)
+    plt.title("湿度变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("湿度", fontproperties=font_prop)
     plt.savefig("./static/img/humidity_trend.png")
     plt.close()
     return render_template(
@@ -165,9 +165,9 @@ def pressure():
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("压力变化趋势",fontproperties=font_prop)
-    plt.xlabel("时间",fontproperties=font_prop)
-    plt.ylabel("压力",fontproperties=font_prop)
+    plt.title("压力变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("压力", fontproperties=font_prop)
     plt.savefig("./static/img/pressure_trend.png")
     plt.close()
     return render_template(
@@ -180,9 +180,9 @@ def power():
     x = range(10)
     y = [random.randint(27, 35) for i in range(10)]
     plt.plot(x, y)
-    plt.title("功率变化趋势",fontproperties=font_prop)
-    plt.xlabel("时间",fontproperties=font_prop)
-    plt.ylabel("功率",fontproperties=font_prop)
+    plt.title("功率变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("功率", fontproperties=font_prop)
     plt.savefig("./static/img/power_trend.png")
     plt.close()
     return render_template(
@@ -197,9 +197,9 @@ def power_consumption():
     # y 按升序排序
     y.sort()
     plt.plot(x, y)
-    plt.title("功耗变化趋势",fontproperties=font_prop)
-    plt.xlabel("时间",fontproperties=font_prop)
-    plt.ylabel("功耗",fontproperties=font_prop)
+    plt.title("功耗变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("功耗", fontproperties=font_prop)
     plt.savefig("./static/img/power_consumption_trend.png")
     plt.close()
     return render_template(
