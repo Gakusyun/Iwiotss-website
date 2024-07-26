@@ -7,8 +7,10 @@ import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 
 matplotlib.use("Agg")
-font_path = './static/fonts/MiSans-Normal.ttf'  # 替换为你的字体文件路径
+font_path = './static/fonts/MiSans-Normal.ttf' 
 font_prop = FontProperties(fname=font_path)
+
+
 app = Flask(__name__)
 is_login = False
 
