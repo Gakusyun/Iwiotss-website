@@ -93,6 +93,27 @@
     color: red;
 }
 
+.cardForAbouts {
+    margin: 40px auto;
+    border: 1px solid rgba(255, 236, 241, 0.533);
+    background-color: rgba(255, 236, 241, 0.533);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    width: 700px;
+    height: 550px;
+}
+
+.cardForAbouts p {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+.cardForAbouts p a {
+    text-decoration: none;
+    color: red;
+}
+
 .input {
     width: 250px;
     border-radius: 15px;

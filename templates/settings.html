@@ -8,38 +8,42 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static',filename='center.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='title.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
-<div class="title">
-    <div class="top">
-        <div class="logo"><a href="/">Iwiotss</a></div>
-        <ul>
-            <li><a href="{{ url_for('home') }}">首页</a></li>
-            <li><a href="{{ url_for('about') }}">关于</a></li>
-            <li><a href="{{ url_for('login') }}">登录</a></li>
-        </ul>
-    </div>
-</div>
-<div class="center">
-    <div class="cardForAbout">
-        <div class="pp">
-            <p>修改信息</p>
-            留空为不修改<br/>为了安全起见，每次修改必须修改密码
+    <div class="title">
+        <div class="top">
+            <div class="logo"><a href="/">Iwiotss</a></div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">首页</a></li>
+                <li><a href="{{ url_for('about') }}">关于</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+            </ul>
         </div>
-        <form action="{{ url_for('settings') }}" method="POST">
-            <div class="input">新密码 <input type="password" id="password" name="password" required/></div>
-            <div class="input">推送密钥<input type="text" id="send_key" name="send_key" required/></div>
-            <div style="margin: 30px auto;width:280px">
-                <input type="radio" name="send_server" value="server_chan" checked/>Server酱<br/>
-                <input type="radio" name="send_server" value="bark"/>Bark<br/>
-            </div>
-            <div class="btnArea">
-                <button type="submit" id="login">确认修改</button>
-            </div>
-        </form>
     </div>
-</div>
+    <div class="center">
+        <div class="cardForAbouts">
+            <div class="pp">
+                <p>修改信息</p>
+                留空为不修改<br />为了安全起见，每次修改必须修改密码
+            </div>
+            <form action="{{ url_for('settings') }}" method="POST">
+                <div class="input">新密码 <input type="password" id="password" name="password" required /></div>
+                <div class="input">推送密钥<input type="text" id="send_key" name="send_key" required /></div>
+                <div style="margin: 30px auto;width:280px">
+                    <input type="radio" name="send_server" value="server_chan" checked />Server酱<br />
+                    <input type="radio" name="send_server" value="bark" />Bark<br /><br />
+                    是否开启推送<br />
+                    <input type="radio" name="enable_send" value="False" checked />不启用<br />
+                    <input type="radio" name="enable_send" value="True" />启用<br />
+                </div>
+                <div class="btnArea">
+                    <button type="submit" id="login">确认修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

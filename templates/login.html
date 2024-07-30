@@ -16,32 +16,33 @@
 </head>
 
 <body>
-<div class="title">
-    <div class="top">
-        <div class="logo"><a href="/">Iwiotss</a></div>
-        <ul>
-            <li><a href="{{ url_for('home') }}">首页</a></li>
-            <li><a href="{{ url_for('about') }}">关于</a></li>
-            <li><a href="{{ url_for('login') }}">登录</a></li>
-        </ul>
-    </div>
-</div>
-<section>
-    <div class="loginblock">
-        <p>登录</p>
-        <form action="{{ url_for('login') }}" method="POST">
-            <div class="input">账号 <input type="text" id="username" name="username" required></div>
-            <div class="input">密码 <input type="password" id="password" name="password" required></div>
-            <div class="btnArea">
-                <button type="submit" id="login">登录</button>
-            </div>
-        </form>
-        <div class="btnArea">
-            <button type="button" onclick="jumpToSignup()">注册</button>
-            <button type="button" id="forget">忘记密码</button>
+    <div class="title">
+        <div class="top">
+            <div class="logo"><a href="/">Iwiotss</a></div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">首页</a></li>
+                <li><a href="{{ url_for('about') }}">关于</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+                <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
+            </ul>
         </div>
     </div>
-</section>
+    <section>
+        <div class="loginblock">
+            <p>登录</p>
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="input">账号 <input type="text" id="username" name="username" required></div>
+                <div class="input">密码 <input type="password" id="password" name="password" required></div>
+                <div class="btnArea">
+                    <button type="submit" id="login">登录</button>
+                </div>
+            </form>
+            <div class="btnArea">
+                <button type="button" onclick="jumpToSignup()">注册</button>
+                <button type="button" id="forget">忘记密码</button>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

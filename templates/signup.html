@@ -7,6 +7,7 @@
     <title>Iwiotss-Signup</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='title.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='login.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <script>
         var jumpToSignup = function () {
@@ -16,43 +17,43 @@
 </head>
 
 <body>
-<div class="title">
-    <div class="top">
-        <div class="logo"><a href="/">Iwiotss</a></div>
-        <ul>
-            <li><a href="{{ url_for('home') }}">首页</a></li>
-            <li><a href="{{ url_for('about') }}">关于</a></li>
-            <li><a href="{{ url_for('login') }}">登录</a></li>
-        </ul>
+    <div class="title">
+        <div class="top">
+            <div class="logo"><a href="/">Iwiotss</a></div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">首页</a></li>
+                <li><a href="{{ url_for('about') }}">关于</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+            </ul>
+        </div>
     </div>
-</div>
-<section>
-    <div class="loginblock">
-        <p>注册</p>
-        <form action="{{ url_for('signup') }}" method="POST">
-            <div class="input">账号 <input type="text" id="username" name="username" required></div>
-            <div class="input">密码 <input type="password" id="password" name="password" required></div>
-            <div class="input">确认 <input type="password" id="confirmPassword" name="confirmPassword" required
-                                           onchange="check()"></div>
-            <div class="btnArea">
-                <button type="submit" id="signup">注册</button>
-            </div>
-            <script>
-                $(document).ready(function () {
-                    $("#signup").hide();
-                });
+    <section>
+        <div class="loginblock">
+            <p>注册</p>
+            <form action="{{ url_for('signup') }}" method="POST">
+                <div class="input">账号 <input type="text" id="username" name="username" required></div>
+                <div class="input">密码 <input type="password" id="password" name="password" required></div>
+                <div class="input">确认 <input type="password" id="confirmPassword" name="confirmPassword" required
+                        onchange="check()"></div>
+                <div class="btnArea">
+                    <button type="submit" id="signup">注册</button>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $("#signup").hide();
+                    });
 
-                function check() {
-                    var password = document.getElementById("password");
-                    var confirmPassword = document.getElementById("confirmPassword");
-                    if (password.value == confirmPassword.value) {
-                        $("#signup").show();
+                    function check() {
+                        var password = document.getElementById("password");
+                        var confirmPassword = document.getElementById("confirmPassword");
+                        if (password.value == confirmPassword.value) {
+                            $("#signup").show();
+                        }
                     }
-                }
-            </script>
-        </form>
-    </div>
-</section>
+                </script>
+            </form>
+        </div>
+    </section>
 </body>
 
 </html>

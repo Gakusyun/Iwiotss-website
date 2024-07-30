@@ -2,5 +2,6 @@
     "username": "admin",
     "password": "admin",
     "send_key": "",
-    "send_server": "None"
+    "send_server": "None",
+    "enable_send": false
 }

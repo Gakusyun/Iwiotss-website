@@ -20,6 +20,7 @@ class User(object):
     password = ""
     send_key = "空"
     send_server = "None"
+    enable_send = False
 
 
 def send(title, body):
@@ -31,6 +32,7 @@ def send(title, body):
         print("还未设置发送服务器")
 
 
+# 推送服务server_chan函数
 def sc_send(text, desp="", key=""):
     postdata = urllib.parse.urlencode({"text": text, "desp": desp}).encode("utf-8")
     url = f"https://sctapi.ftqq.com/{key}.send"
@@ -40,6 +42,7 @@ def sc_send(text, desp="", key=""):
         print(result)
 
 
+# 推送服务bark函数
 def bark_send(title, body="", key=""):
     postdata = urllib.parse.urlencode(
         {
@@ -95,6 +98,13 @@ sensor3 = Sensor()
 sensor4 = Sensor()
 
 
+def tof(boo: str) -> bool:
+    if boo == "True":
+        return True
+    elif boo == "False":
+        return False
+
+
 def check_credentials(username: str, password: str) -> bool:
     users_directory = "./users"
     try:
@@ -108,6 +118,7 @@ def check_credentials(username: str, password: str) -> bool:
                     User.password = data["password"]
                     User.send_key = data["send_key"]
                     User.send_server = data["send_server"]
+                    User.enable_send = data["enable_send"]
                     return True
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -250,6 +261,7 @@ def signup():
                 "password": password,
                 "send_key": "",
                 "send_server": "None",
+                "enable_send": False,
             }
             # 使用json.dump将数据写入文件
             json.dump(user_data, user_file, indent=4)
@@ -263,6 +275,7 @@ def settings():
         password = request.form.get("password")
         send_key = request.form.get("send_key")
         send_server = request.form.get("send_server")
+        enable_send = tof(request.form.get("enable_send"))
         print("密码" + password, send_key)
         # 修改用户文件中的密码
         User.password = password
@@ -275,6 +288,7 @@ def settings():
                 "password": password,
                 "send_key": send_key,
                 "send_server": send_server,
+                "enable_send": enable_send,
             }
             json.dump(user_data, user_file, indent=4)
         return redirect(url_for("logout"))

@@ -8,36 +8,38 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static',filename='title.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='center.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
-<div class="title">
-    <div class="top">
-        <div class="logo">Iwiotss</div>
-        <ul>
-            <li><a href="{{ url_for('home') }}">首页</a></li>
-            <li><a href="{{ url_for('about') }}">关于</a></li>
-            <li><a href="{{ url_for('login') }}">登录</a></li>
-        </ul>
+    <div class="title">
+        <div class="top">
+            <div class="logo">Iwiotss</div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">首页</a></li>
+                <li><a href="{{ url_for('about') }}">关于</a></li>
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="bodyCenter">
-    <div class="cardForAbout">
-        <p onclick="devplus()">由<b>{{ developer[0] }}</b>、<b>{{ developer[1] }}</b>、<b>{{ developer[2] }}</b>制作（排名不分先后）
-        </p>
-        <!-- Made by Gakusyun, Dianya Fu, Karl-->
+    <div class="bodyCenter">
+        <div class="cardForAbout">
+            <p onclick="devplus()">由<b>{{ developer[0] }}</b>、<b>{{ developer[1] }}</b>、<b>{{ developer[2]
+                    }}</b>制作（排名不分先后）
+            </p>
+            <!-- Made by Gakusyun, Dianya Fu, Karl-->
+        </div>
     </div>
-</div>
-<script>
-    clicktimes = 0;
+    <script>
+        clicktimes = 0;
 
-    function devplus() {
-        clicktimes++;
-        if (clicktimes >= 5) {
-            location.href = "/develope";
+        function devplus() {
+            clicktimes++;
+            if (clicktimes >= 5) {
+                location.href = "/develope";
+            }
         }
-    }
-</script>
+    </script>
 </body>
 
 </html>

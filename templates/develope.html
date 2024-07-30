@@ -4,47 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <title>Develope</title>
 </head>
 
 <body>
-<h1>Iwiotss Develope Page</h1>
-<h2>User Info</h2>
-<table>
-    <tr>
-        <th>User Name:</th>
-        <td>{{ User.username }}</td>
-    </tr>
-    <tr>
-        <th>Password:</th>
-        <td>{{ User.password }}</td>
-    </tr>
-    <tr>
-        <th>Push Server:</th>
-        <td>{{ User.send_server }}</td>
-    </tr>
-    <tr>
-        <th>Send Key:</th>
-        <td>{{ User.send_key }}</td>
-    </tr>
-
-</table>
-<h2>Push Server Test</h2>
-<form action="{{ url_for('develope') }}" method="POST">
+    <h1>Iwiotss Develope Page</h1>
+    <h2>User Info</h2>
     <table>
         <tr>
-            <th>Title:</th>
-            <td><input type="text" name="title"/></td>
+            <th>User Name:</th>
+            <td>{{ User.username }}</td>
         </tr>
         <tr>
-            <th>Content:</th>
-            <td><input type="text" name="body"/></td>
+            <th>Password:</th>
+            <td>{{ User.password }}</td>
         </tr>
         <tr>
-            <td rowspan="2"><input type="submit" value="Submit"/></td>
+            <th>Push Server:</th>
+            <td>{{ User.send_server }}</td>
+        </tr>
+        <tr>
+            <th>Send Key:</th>
+            <td>{{ User.send_key }}</td>
+        </tr>
+        <tr>
+            <th>Enable push</th>
+            <td>{{ User.enable_send }}</td>
         </tr>
     </table>
-</form>
+    <h2>Push Server Test</h2>
+    <form action="{{ url_for('develope') }}" method="POST">
+        <table>
+            <tr>
+                <th><label for="title">Title:</label></th>
+                <td><input type="text" name="title" id="title" /></td>
+            </tr>
+            <tr>
+                <th><label for="body">Content:</label></th>
+                <td><input type="text" name="body" id="body" /></td>
+            </tr>
+            <tr>
+                <td rowspan="2"><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+    Can't receive? Read the document for help.<br />
+    <a href="https://sct.ftqq.com/">Server chan</a><br />
+    <a href="https://bark.day.app/#/">Bark</a>
+
 </body>
 
 </html>
