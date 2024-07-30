@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 
 matplotlib.use("Agg")
-font_path = './static/fonts/MiSans-Normal.ttf' 
+font_path = "./static/fonts/MiSans-Normal.ttf"
 font_prop = FontProperties(fname=font_path)
 
 
@@ -45,7 +45,7 @@ def bark_send(title, body="", key=""):
         {
             "title": title,
             "body": body,
-            "icon": "https://img.picui.cn/free/2024/07/14/6693d11d1d3b4.jpg",
+            "icon": "https://i0.hdslb.com/bfs/face/b068c2305d605f151eafb6802f579d86ff1c7239.jpg",
         }
     ).encode("utf-8")
     url = f"https://api.day.app/{key}/"
@@ -96,18 +96,16 @@ sensor4 = Sensor()
 
 
 def check_credentials(username: str, password: str) -> bool:
-    print(username, password)
     users_directory = "./users"
     try:
         users_files = os.listdir(users_directory)
-        if username + ".json" in users_files:
-            user_file_path = os.path.join(users_directory, username + ".json")
+        if username.upper() + ".json" in users_files:
+            user_file_path = os.path.join(users_directory, username.upper() + ".json")
             with open(user_file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                print(data.get("password"))
                 if data.get("password") == password:
-                    User.username = username
-                    User.password = password
+                    User.username = data["username"]
+                    User.password = data["password"]
                     User.send_key = data["send_key"]
                     User.send_server = data["send_server"]
                     return True
@@ -241,13 +239,18 @@ def signup():
         password = request.form.get("password")
         # 在users文件夹下创建一个文件，文件名是username.json
         users_directory = "./users"
-        user_file_path = os.path.join(users_directory, username + ".json")
+        user_file_path = os.path.join(users_directory, username.upper() + ".json")
         if not os.path.exists(users_directory):
             os.makedirs(users_directory)
         # 打开（或创建）用户文件准备写入数据
         with open(user_file_path, "w", encoding="utf-8") as user_file:
             # 假设我们有一些用户信息要保存，例如字典类型
-            user_data = {"password": password, "send_key": "", "send_server": "None"}
+            user_data = {
+                "username": username,
+                "password": password,
+                "send_key": "",
+                "send_server": "None",
+            }
             # 使用json.dump将数据写入文件
             json.dump(user_data, user_file, indent=4)
             return redirect(url_for("login"))
@@ -265,9 +268,10 @@ def settings():
         User.password = password
         User.send_key = send_key
         User.send_server = send_server
-        user_file_path = os.path.join("./users", User.username + ".json")
+        user_file_path = os.path.join("./users", User.username.upper() + ".json")
         with open(user_file_path, "w", encoding="utf-8") as user_file:
             user_data = {
+                "username": User.username,
                 "password": password,
                 "send_key": send_key,
                 "send_server": send_server,
