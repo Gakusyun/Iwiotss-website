@@ -4,6 +4,11 @@
     user-select: none;
 }
 
+body {
+    background-image: url(../static/img/bgcm.png);
+    background-size: cover;
+}
+
 .nav {
     height: 47px;
     width: 100%;
