@@ -271,6 +271,8 @@ def signup():
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
+    if not is_login:
+        return redirect(url_for("login"))
     if request.method == "POST":
         password = request.form.get("password")
         send_key = request.form.get("send_key")
@@ -318,6 +320,183 @@ def develope():
     if not is_login:
         return "<h1>You Should Login before you access this page!</h1><br /><a href='login'>Login</a>"
     return render_template("develope.html", User=User)
+
+
+@app.route("/m")
+def mhome():
+    sensor1.get_latest_data()
+    sensor2.get_latest_data()
+    sensor3.get_latest_data()
+    sensor4.get_latest_data()
+    return render_template(
+        "mindex.html",
+        device_number=Sensor.get_Sensor_count(),
+        sensor1=sensor1,
+        sensor2=sensor2,
+        sensor3=sensor3,
+        sensor4=sensor4,
+    )
+
+
+@app.route("/mstatistics/temperature")
+def mtemperature():
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("温度变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("温度", fontproperties=font_prop)
+    plt.savefig("./static/img/temperature_trend.png")
+    plt.close()
+    return render_template(
+        "mstatistics.html", msg="温度", img_path="img/temperature_trend.png"
+    )
+
+
+@app.route("/mstatistics/humidity")
+def mhumidity():
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("湿度变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("湿度", fontproperties=font_prop)
+    plt.savefig("./static/img/humidity_trend.png")
+    plt.close()
+    return render_template(
+        "mstatistics.html", msg="湿度", img_path="img/humidity_trend.png"
+    )
+
+
+@app.route("/mstatistics/pressure")
+def mpressure():
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("压力变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("压力", fontproperties=font_prop)
+    plt.savefig("./static/img/pressure_trend.png")
+    plt.close()
+    return render_template(
+        "mstatistics.html", msg="压力", img_path="img/pressure_trend.png"
+    )
+
+
+@app.route("/mstatistics/power")
+def mpower():
+    x = range(10)
+    y = [random.randint(27, 35) for i in range(10)]
+    plt.plot(x, y)
+    plt.title("功率变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("功率", fontproperties=font_prop)
+    plt.savefig("./static/img/power_trend.png")
+    plt.close()
+    return render_template(
+        "mstatistics.html", msg="功率", img_path="img/power_trend.png"
+    )
+
+
+@app.route("/mstatistics/power_consumption")
+def mpower_consumption():
+    x = range(10)
+    y = [random.randint(100, 1000) for i in range(10)]
+    # y 按升序排序
+    y.sort()
+    plt.plot(x, y)
+    plt.title("功耗变化趋势", fontproperties=font_prop)
+    plt.xlabel("时间", fontproperties=font_prop)
+    plt.ylabel("功耗", fontproperties=font_prop)
+    plt.savefig("./static/img/power_consumption_trend.png")
+    plt.close()
+    return render_template(
+        "mstatistics.html", msg="功耗", img_path="img/power_consumption_trend.png"
+    )
+
+
+@app.route("/mabout")
+def mabout():
+    developer = ["高学骏", "付典雅", "李恺烨"]
+    random.shuffle(developer)
+    return render_template("mabout.html", developer=developer)
+
+
+@app.route("/mlogin", methods=["GET", "POST"])
+def mlogin():
+    global is_login
+    print(is_login)
+    if is_login:
+        return redirect(url_for("mself"))
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if check_credentials(username, password):
+            is_login = True
+            return redirect(url_for("mself"))
+        else:
+            return '登录失败，请重试！<a href="login">redo</a>'
+    else:
+        return render_template("mlogin.html")
+
+
+@app.route("/msignup", methods=["GET", "POST"])
+def msignup():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        # 在users文件夹下创建一个文件，文件名是username.json
+        users_directory = "./users"
+        user_file_path = os.path.join(users_directory, username.upper() + ".json")
+        if not os.path.exists(users_directory):
+            os.makedirs(users_directory)
+        # 打开（或创建）用户文件准备写入数据
+        with open(user_file_path, "w", encoding="utf-8") as user_file:
+            # 假设我们有一些用户信息要保存，例如字典类型
+            user_data = {
+                "username": username,
+                "password": password,
+                "send_key": "",
+                "send_server": "None",
+                "enable_send": False,
+            }
+            # 使用json.dump将数据写入文件
+            json.dump(user_data, user_file, indent=4)
+            return redirect(url_for("mlogin"))
+    return render_template("msignup.html")
+
+
+@app.route("/msettings", methods=["GET", "POST"])
+def msettings():
+    if not is_login:
+        return redirect(url_for("mlogin"))
+    if request.method == "POST":
+        password = request.form.get("password")
+        send_key = request.form.get("send_key")
+        send_server = request.form.get("send_server")
+        enable_send = tof(request.form.get("enable_send"))
+        print("密码" + password, send_key)
+        # 修改用户文件中的密码
+        User.password = password
+        User.send_key = send_key
+        User.send_server = send_server
+        user_file_path = os.path.join("./users", User.username.upper() + ".json")
+        with open(user_file_path, "w", encoding="utf-8") as user_file:
+            user_data = {
+                "username": User.username,
+                "password": password,
+                "send_key": send_key,
+                "send_server": send_server,
+                "enable_send": enable_send,
+            }
+            json.dump(user_data, user_file, indent=4)
+        return redirect(url_for("logout"))
+    return render_template("msettings.html", User=User)
+
+
+@app.route("/mself")
+def mself():
+    return render_template("mself.html", User=User)
 
 
 if __name__ == "__main__":

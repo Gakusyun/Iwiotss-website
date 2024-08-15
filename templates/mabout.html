@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iwiotss-About</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='m.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon" />
+    <script>
+        window.onload = function () {
+            function getWindowInfo() {
+                const windowInfo = {
+                    width: window.innerWidth,
+                    height: window.innerHeight // 修正了属性名  
+                };
+                if (windowInfo.width >= 1200) {
+                    window.location.href = "/about"; // 确保这里的URL是有效的  
+                }
+            }
+
+            // 初始调用，检查页面加载时的窗口大小  
+            getWindowInfo();
+
+            // 监听窗口大小变化事件  
+            window.addEventListener('resize', getWindowInfo);
+        };  
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <a href="/m">Iwiotss</a>
+        </div>
+        <div class="opt" onclick="showselect()">
+            ···
+        </div>
+
+    </div>
+    <div class="center">
+        <div class="selectbar">
+            <div class="select">
+                <a href="/m">首页</a>
+                <a href="/mabout">关于</a>
+                <a href="/mlogin">登录</a>
+            </div>
+            <script>
+                $(".selectbar").hide();
+                var hide = true;
+                function showselect() {
+                    if (hide) {
+                        $(".selectbar").show();
+                        hide = false;
+                    } else {
+                        $(".selectbar").hide();
+                        hide = true;
+                    }
+                }
+            </script>
+        </div>
+        <div class="card">
+            <div class="about">
+                <p onclick="devplus()">由<b>{{ developer[0] }}</b>、<b>{{ developer[1] }}</b>、<b>{{ developer[2]
+                        }}</b>制作
+                    <!-- Made by Gakusyun, Dianya Fu, Karl-->
+                </p>
+                <p>（排名不分先后）</p>
+                <p>Teyvat_Group&copy;2024&nbsp;版权所有</p>
+                <p><a href="https://beian.miit.gov.cn/">鄂ICP备</a></p>
+                <script>
+                    clicktimes = 0;
+                    function devplus() {
+                        clicktimes++;
+                        if (clicktimes >= 5) {
+                            location.href = "/develope";
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

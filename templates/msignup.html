@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iwiotss-Sign up</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='m.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon" />
+    <script>
+        window.onload = function () {
+            function getWindowInfo() {
+                const windowInfo = {
+                    width: window.innerWidth,
+                    height: window.innerHeight // 修正了属性名  
+                };
+                if (windowInfo.width >= 1200) {
+                    window.location.href = "/signup"; // 确保这里的URL是有效的  
+                }
+            }
+
+            // 初始调用，检查页面加载时的窗口大小  
+            getWindowInfo();
+
+            // 监听窗口大小变化事件  
+            window.addEventListener('resize', getWindowInfo);
+        };  
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <a href="/m">Iwiotss</a>
+        </div>
+        <div class="opt" onclick="showselect()">
+            ···
+        </div>
+
+    </div>
+    <div class="center">
+        <div class="selectbar">
+            <div class="select">
+                <a href="/m">首页</a>
+                <a href="/mabout">关于</a>
+                <a href="/mlogin">登录</a>
+            </div>
+            <script>
+                $(".selectbar").hide();
+                var hide = true;
+                function showselect() {
+                    if (hide) {
+                        $(".selectbar").show();
+                        hide = false;
+                    } else {
+                        $(".selectbar").hide();
+                        hide = true;
+                    }
+                }
+            </script>
+        </div>
+        <div class="card">
+            <div class="item">
+                <div class="title">注册</div>
+            </div>
+            <div class="loginarea">
+                <form action="{{ url_for('msignup') }}" method="POST">
+                    <div class="input">账号 <input type="text" id="username" name="username" required></div>
+                    <div class="input">密码 <input type="password" id="password" name="password" required></div>
+                    <div class="input">确认 <input type="password" id="confirmPassword" name="confirmPassword" required
+                            onchange="check()"></div>
+                    <div class="btnArea">
+                        <button type="submit" id="signup">注册</button>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#signup").hide();
+                        });
+
+                        function check() {
+                            var password = document.getElementById("password");
+                            var confirmPassword = document.getElementById("confirmPassword");
+                            if (password.value == confirmPassword.value) {
+                                $("#signup").show();
+                            }
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

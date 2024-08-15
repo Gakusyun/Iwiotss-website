@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{msg}}</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='m.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <a href="/m">Iwiotss</a>
+        </div>
+        <div class="opt" onclick="showselect()">
+            ···
+        </div>
+
+    </div>
+    <div class="center">
+        <div class="selectbar">
+            <div class="select">
+                <a href="/m">首页</a>
+                <a href="/mabout">关于</a>
+                <a href="/mlogin">登录</a>
+            </div>
+            <script>
+                $(".selectbar").hide();
+                var hide = true;
+                function showselect() {
+                    if (hide) {
+                        $(".selectbar").show();
+                        hide = false;
+                    } else {
+                        $(".selectbar").hide();
+                        hide = true;
+                    }
+                }
+            </script>
+        </div>
+        <div class="card">
+            <div class="item">
+                <div class="title">{{msg}}</div>
+            </div>
+            <img src="{{ url_for('static',filename=img_path) }}" />
+        </div>
+    </div>
+</body>
+
+</html>

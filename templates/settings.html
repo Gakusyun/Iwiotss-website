@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='center.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='title.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
+    <script>
+        window.onload = function () {
+            function getWindowInfo() {
+                const windowInfo = {
+                    width: window.innerWidth,
+                    height: window.innerHeight // 修正了属性名  
+                };
+                if (windowInfo.width <= 1200) {
+                    window.location.href = "/msettings"; // 确保这里的URL是有效的  
+                }
+            }
+
+            // 初始调用，检查页面加载时的窗口大小  
+            getWindowInfo();
+
+            // 监听窗口大小变化事件  
+            window.addEventListener('resize', getWindowInfo);
+        };  
+    </script>
 </head>
 
 <body>
@@ -26,7 +45,7 @@
         <div class="cardForAbouts">
             <div class="pp">
                 <p>修改信息</p>
-                留空为不修改<br />为了安全起见，每次修改必须修改密码
+                为了安全起见，每次修改必须修改密码
             </div>
             <form action="{{ url_for('settings') }}" method="POST">
                 <div class="input">新密码 <input type="password" id="password" name="password" required /></div>

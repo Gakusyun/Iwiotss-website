@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iwiotss-Login</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='m.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon" />
+    <script>
+        window.onload = function () {
+            function getWindowInfo() {
+                const windowInfo = {
+                    width: window.innerWidth,
+                    height: window.innerHeight // 修正了属性名  
+                };
+                if (windowInfo.width >= 1200) {
+                    window.location.href = "/login"; // 确保这里的URL是有效的  
+                }
+            }
+
+            // 初始调用，检查页面加载时的窗口大小  
+            getWindowInfo();
+
+            // 监听窗口大小变化事件  
+            window.addEventListener('resize', getWindowInfo);
+        };  
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <a href="/m">Iwiotss</a>
+        </div>
+        <div class="opt" onclick="showselect()">
+            ···
+        </div>
+
+    </div>
+    <div class="center">
+        <div class="selectbar">
+            <div class="select">
+                <a href="/m">首页</a>
+                <a href="/mabout">关于</a>
+                <a href="/mlogin">登录</a>
+            </div>
+            <script>
+                $(".selectbar").hide();
+                var hide = true;
+                function showselect() {
+                    if (hide) {
+                        $(".selectbar").show();
+                        hide = false;
+                    } else {
+                        $(".selectbar").hide();
+                        hide = true;
+                    }
+                }
+            </script>
+        </div>
+        <div class="card">
+            <div class="item">
+                <div class="title">登录</div>
+            </div>
+            <div class="loginarea">
+                <form action="{{ url_for('mlogin') }}" method="POST">
+                    <div class="input">账号 <input type="text" id="username" name="username" required></div>
+                    <div class="input">密码 <input type="password" id="password" name="password" required></div>
+                    <div class="btnArea">
+                        <button type="submit" id="login">登录</button>
+                    </div>
+                </form>
+                <div class="btnArea">
+                    <button type="button" onclick="jumpToSignup()">注册</button>
+                    <button type="button" id="forget">忘记密码</button>
+                </div>
+                <script>
+                    var jumpToSignup = function () {
+                        window.location.href = "{{url_for('msignup')}}";
+                    }
+                </script>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

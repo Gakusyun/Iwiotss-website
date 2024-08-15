@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iwiotss</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='m.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon" />
+    <script>
+        window.onload = function () {
+            function getWindowInfo() {
+                const windowInfo = {
+                    width: window.innerWidth,
+                    height: window.innerHeight // 修正了属性名  
+                };
+                if (windowInfo.width >= 1200) {
+                    window.location.href = "/"; // 确保这里的URL是有效的  
+                }
+            }
+
+            // 初始调用，检查页面加载时的窗口大小  
+            getWindowInfo();
+
+            // 监听窗口大小变化事件  
+            window.addEventListener('resize', getWindowInfo);
+        };  
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <a href="/m">Iwiotss</a>
+        </div>
+        <div class="opt" onclick="showselect()">···</div>
+    </div>
+    <div class="center">
+        <div class="selectbar">
+            <div class="select">
+                <a href="/m">首页</a>
+                <a href="/mabout">关于</a>
+                <a href="/mlogin">登录</a>
+            </div>
+            <script>
+                $(".selectbar").hide();
+                var hide = true;
+                function showselect() {
+                    if (hide) {
+                        $(".selectbar").show();
+                        hide = false;
+                    } else {
+                        $(".selectbar").hide();
+                        hide = true;
+                    }
+                }
+            </script>
+        </div>
+        <div class="card">
+            <div class="item">
+                <a href="/mstatistics/temperature">
+                    <div class="title">温度</div>
+                    <div class="context" id="temperature">摄氏{{ sensor1.get_temperature() }}度</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="/mstatistics/humidity">
+                    <div class="title">湿度</div>
+                    <div class="context" id="humidity">百分之{{ sensor1.get_humidity() }}</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="/mstatistics/pressure">
+                    <div class="title">压力</div>
+                    <div class="context" id="pressure">{{ sensor1.get_pressure() }}帕斯卡</div>
+                </a>
+            </div>
+            <div class="item">
+                <div class="title">设备量</div>
+                <div class="context" id="device_count">{{ device_number }}台</div>
+            </div>
+            <div class="item">
+                <a href="/mstatistics/power">
+                    <div class="title">功率</div>
+                    <div class="context" id="power">{{ sensor1.get_power() }}瓦特</div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="/mstatistics/power_consumption">
+                    <div class="title">总耗电量</div>
+                    <div class="context" id="power_consumption">{{ sensor1.get_power_consumption() }}千瓦时</div>
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <div class="title">实时监控</div>
+            </div>
+            <img src="{{ url_for('static',filename='/img/bgc.jpg') }}">
+        </div>
+    </div>
+</body>
+
+</html>
