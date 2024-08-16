@@ -10,23 +10,28 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='center.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <script>
-        window.onload = function () {
-            function getWindowInfo() {
-                const windowInfo = {
-                    width: window.innerWidth,
-                    height: window.innerHeight // 修正了属性名  
-                };
-                if (windowInfo.width <= 1200) {
-                    window.location.href = "/m"; // 确保这里的URL是有效的  
-                }
-            }
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-            // 初始调用，检查页面加载时的窗口大小  
-            getWindowInfo();
+        if (isMobile) {
+            window.location.href = "/m";
+        }
+        // window.onload = function () {
+        //     function getWindowInfo() {
+        //         const windowInfo = {
+        //             width: window.innerWidth,
+        //             height: window.innerHeight // 修正了属性名
+        //         };
+        //         if (windowInfo.width <= 1200) {
+        //             window.location.href = "/m"; // 确保这里的URL是有效的
+        //         }
+        //     }
 
-            // 监听窗口大小变化事件  
-            window.addEventListener('resize', getWindowInfo);
-        };  
+        //     // 初始调用，检查页面加载时的窗口大小
+        //     getWindowInfo();
+
+        //     // 监听窗口大小变化事件
+        //     window.addEventListener('resize', getWindowInfo);
+        // };  
     </script>
 </head>
 
