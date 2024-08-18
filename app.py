@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
-import json, os, random
+import json
+import os
+import random
 import matplotlib
 import urllib.parse
 import urllib.request
