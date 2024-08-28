@@ -5,8 +5,7 @@
 }
 
 body {
-    /* background-image: url(../static/img/bgc.jpg); */
-    background-image: url(https://raw.githubusercontent.com/Gakusyun/pic-bed/master/bgc.jpg);
+    background-image: url(../static/img/bgc.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
